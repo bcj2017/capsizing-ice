@@ -93,11 +93,11 @@ clridx = startclridx; % reset color index for next plot
 % Define inset positioning for log-log plot:
 subplotPos = get(h1, 'Position');
 axes('Position', [subplotPos(1) + 0.53 * subplotPos(3), subplotPos(2) + 0.45 * subplotPos(4), .41*subplotPos(3), .41*subplotPos(4)]);
-hold on;
 
 % Plot power-law
 epsilon = 1e-2; tt = linspace(0,1-epsilon,1000);
 loglog(1-tt,(1-tt).^(8/5), '--', 'Color','k','Linewidth',lwalpha);
+hold on;
 
 for j = 1:length(names) %iterate through experiments we have data on
     % Load data for experiment
@@ -120,6 +120,10 @@ for j = 1:length(names) %iterate through experiments we have data on
     % Increase color index to distinguish between experiments
     clridx = clridx+clrint; 
 end
+
+% Simulation plot
+p = plot(1-sim_times,areas,simmarker); 
+p.LineWidth = lw; p.MarkerSize = simmarkersize; p.Color = simcolor;
 
 % Plot details
 xlabel('$1-t/t_f$','Interpreter','Latex','FontName',fontname,'FontSize',fontsize); 
@@ -396,5 +400,5 @@ xlabel('counts','Interpreter','latex')
 %% ------------------------------------------------------------------------
 %% Save file
 %% ------------------------------------------------------------------------
-filename = 'fig05ABCDdraft.pdf';
+filename = 'fig05ABEFdraft.pdf';
 % exportgraphics(t,filename,'ContentType','vector')
